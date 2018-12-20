@@ -1,0 +1,6 @@
+- name: configurar paquete basico
+  hosts: www
+  become: True
+  roles:
+    - basictools
+

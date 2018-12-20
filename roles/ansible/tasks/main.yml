@@ -1,0 +1,37 @@
+- name: Add the user 'ansible' with a bash shell. appen
+  user:
+    name: ansible
+    shell: /bin/bash
+    home: /home/ansible
+    append: yes
+
+
+- name: Incluir en sudoers 
+  copy:
+    src: files/ansible
+    dest: /etc/sudoers.d/ansible
+
+
+- file:
+    path: /home/ansible/.ssh
+    owner: ansible
+    group: ansible
+    state: directory
+    mode: 0700
+
+- name: Incluir Authorized Keys
+  copy:
+    src: files/authorized_keys
+    dest: /home/ansible/.ssh/authorized_keys
+    
+- file:
+    path: /home/ansible/.ssh/authorized_keys
+    state: touch
+    owner: ansible
+    mode: 0700
+
+- name: Configurar AUTHKEY
+  user:
+    name: ansible
+    ssh_key_file: /home/ansible/.ssh/authorized_keys
+   

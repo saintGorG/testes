@@ -1,0 +1,23 @@
+packages:
+  - vim
+  - nano
+  - wget
+  - telnet
+  - net-tools
+  - httpry
+  - sysstat
+  - bc 
+  - htop
+  - lsof
+  - bind-utils
+  - lftp
+  - mlocate
+  - bash-completion 
+  - iptraf
+  - iotop
+  - ioping
+  - unzip
+  - man
+  - iftop
+  - rsync
+  - tree

@@ -1,0 +1,5 @@
+- name: Sample role run
+  hosts: localhost
+  roles:
+    - role: nginx
+

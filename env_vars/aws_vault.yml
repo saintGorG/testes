@@ -1,0 +1,6 @@
+aws_vpc: "vpc-9c4906fb"
+aws_access: "AKIAI4BTY2ST5ZIQQJNA"
+aws_secret: "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"
+aws_keypair_name: "curso-itnow"
+aws_ec2_ami: "ami-5448952d"
+aws_ec2_subnet: "subnet-593c842e"

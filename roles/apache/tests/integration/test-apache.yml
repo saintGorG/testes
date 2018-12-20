@@ -1,0 +1,6 @@
+- name: Sample role run
+  hosts: test
+  roles:
+    - role: apache
+
+

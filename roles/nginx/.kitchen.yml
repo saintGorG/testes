@@ -1,0 +1,51 @@
+driver:
+  name: docker
+
+provisioner:
+  name: ansible_playbook
+  hosts: localhost
+  roles_path: ../
+  require_ansible_repo: false
+  require_ansible_omnibus: false
+  require_ansible_source: false
+  require_pip: true
+  ansible_version: 2.3.2.0
+  http_proxy: <%= ENV['HTTP_PROXY'] %>
+  https_proxy: <%= ENV['HTTPS_PROXY'] %>
+  no_proxy: localhost,127.0.0.1
+  ignore_extensions_from_root: [".git",".idea",".kitchen.yml"]
+  ignore_paths_from_root: [".git",".idea",".kitchen"]
+
+transport:
+  max_ssh_sessions: 6
+
+verifier:
+  name: inspec
+
+platforms: 
+  - name: centos-7
+    driver_config:
+      image: dliappis/centos-devopsci:7
+      provision_command:
+        - sed -ri 's/^#?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
+        - sed -ri 's/^#?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+        - sed -ri 's/^#?UsePAM .*/UsePAM no/' /etc/ssh/sshd_config
+        - rm /etc/yum.repos.d/epel*repo /etc/yum.repos.d/puppetlabs-pc1.repo
+        - yum -y install epel-release
+        - yum -y install initscripts
+        - yum -y remove ansible
+        - yum clean all
+        - pip install jmespath
+      run_command: "/usr/sbin/init"
+      privileged: true
+      use_sudo: false
+
+suites:
+  - name: nginx
+    provisioner:
+      idempotency_test: true
+      playbook: test/integration/test-nginx.yml
+    run_list:
+    attributes:
+ 
+

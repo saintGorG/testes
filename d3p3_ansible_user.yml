@@ -1,0 +1,6 @@
+- name: crear usuario ansible y permite el acceso
+  hosts: ansible
+  become: True
+  roles:
+    - ansible
+

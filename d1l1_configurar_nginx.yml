@@ -1,0 +1,15 @@
+- name: configurar nginx
+  hosts: www
+  become: True
+  roles:
+    - nginx
+
+- name: desplegar pagina de bienvenida
+  hosts: www
+  become: True
+  tasks:
+    - name: copiar pagina de bienvenida
+      template:
+        src: templates/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+

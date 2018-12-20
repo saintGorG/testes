@@ -1,0 +1,51 @@
+###################################################
+####### Definición de máquinas virtuales www ######
+###################################################
+
+servers:
+  www:
+   hostname: www
+   networks:
+    first:
+      ip: x.x.x.x
+      netmask: x.x.x.x
+      gateway: x.x.x.x
+      dns1: 8.8.8.8
+      dns2: 4.4.4.4
+      vlan: red-vmware
+    second:
+      ip: x.x.x.x
+      netmask: 255.255.255.0
+      gateway: x.x.x.x
+      dns1: 8.8.8.8
+      dns2: 4.4.4.4
+      vlan: red-vmware
+   domain : test.local
+   vlan: red-vmware
+   disksize_gb: 20
+   memory_mb: 2048
+   cpus: 2
+   template: "{{ template_centos7 }}"
+   guest_id: "rhel7_64Guest"
+
+###################################################
+####### Definicón de las máquinas de BBDD #########
+###################################################
+
+  bbdd:
+   hostname: bbdd
+   networks:
+    first:
+      ip: x.x.x.x
+      netmask: 255.255.255.0
+      gateway: x.x.x.x
+      dns1: 8.8.8.8
+      dns2: 4.4.4.4
+      vlan: red-vmware
+   domain : test.local
+   vlan: red-vmware
+   disksize_gb: 20
+   memory_mb: 2048
+   cpus: 2
+   template: "{{ template_centos7 }}"
+   guest_id: "rhel7_64Guest"

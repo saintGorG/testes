@@ -1,0 +1,19 @@
+- name: instalar paquete nginx
+  yum:
+    name: "nginx"
+    state: present
+- name: configuración base nginx
+  copy: 
+    src: files/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  notify: reload nginx
+- name: configuración vhost nginx
+  copy:
+    src: files/vhost_default.conf
+    dest: /etc/nginx/conf.d/vhost_default.conf
+  notify: reload nginx
+- name: arrancar nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes

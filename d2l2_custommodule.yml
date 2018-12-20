@@ -1,0 +1,5 @@
+- name: laboratorio custommode
+  hosts: www 
+  become: True  
+  roles:
+    - laboratorio-custommodule

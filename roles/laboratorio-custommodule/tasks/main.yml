@@ -1,0 +1,8 @@
+---
+- name: ensure nc is installed
+  yum:
+    name: nc
+    state: present
+- name: run my custom module
+  can_reach: host=www.google.com port=80 timeout=1
+

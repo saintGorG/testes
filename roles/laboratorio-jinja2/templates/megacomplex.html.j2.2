@@ -1,0 +1,39 @@
+{% include 'header.html.j2' %}
+<h1>system data for {{ ansible_hostname }}</h1>
+
+<h2>OS Data</h2>
+<table>
+    <thead>
+    <tr>
+        <th>OS family</th>
+        <th>OS vendor</th>
+        <th>OS version</th>
+    </tr>
+    </thead>
+ <tbody>
+    <tr>
+        <td>{{ ansible_os_family | get_logo }}</td>
+        <td>{{ ansible_distribution | get_logo }}</td>
+        <td>{{ ansible_distribution_version }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Network Data</h2>
+<table>
+    <thead>
+        <th>Network interface</th>
+        <th>IP v4</th>
+        <th>Mac Addres</th>
+    </thead>
+    <tbody>
+    {% for device in ansible_interfaces %}
+        <tr>
+        <td>{{ device }}</td>
+        <td>{{ hostvars[inventory_hostname]['ansible_' + device]['ipv4']['address'] }}</td>
+        <td>{% if device == 'lo' %}N/A{% else %}{{ hostvars[inventory_hostname]['ansible_' + device]['macaddress'] }}{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% include 'footer.html.j2' %}

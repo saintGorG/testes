@@ -1,0 +1,23 @@
+- name: configurar nginx
+  hosts: www
+  become: True
+  roles:
+    - nginx
+  tags: www
+
+- name: desplegar pagina de bienvenida
+  hosts: www
+  become: True
+  tasks:
+    - name: copiar pagina de bienvenida
+      template:
+        src: templates/index.html.j2
+        dest: /usr/share/nginx/html/index.html
+  tags: www
+
+- name: instalar mysql
+  hosts: bbdd
+  become: True
+  roles:
+    - mysql
+  tags: bbdd

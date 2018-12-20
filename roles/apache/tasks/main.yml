@@ -1,0 +1,19 @@
+- name: instalar paquete apache
+  yum:
+    name: "httpd"
+    state: present
+
+- name: arrancar apache
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: configuración index apache
+  copy:
+    src: files/indexapache.html.j2
+    dest: /var/www/html/index.html
+  notify: reload apache
+
+
+

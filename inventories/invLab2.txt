@@ -1,0 +1,16 @@
+[www]
+52.50.10.36
+34.245.226.25
+
+[mariadb]
+52.48.44.235
+
+[www:vars]
+ansible_user=centos
+ansible_private_key_file=/home/centos/curso-itnow.pem
+ansible_host_key_checking=false
+
+[mariadb:vars]
+ansible_user=centos
+ansible_private_key_file=/home/centos/curso-itnow.pem
+ansible_host_key_checking=false

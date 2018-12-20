@@ -1,0 +1,6 @@
+- name: configurar mariadb
+  hosts: mariadb
+  become: True
+  roles:
+    - mariadb
+

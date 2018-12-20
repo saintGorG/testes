@@ -1,0 +1,6 @@
+- name: configurar apache
+  hosts: www
+  become: True
+  roles:
+    - apache
+

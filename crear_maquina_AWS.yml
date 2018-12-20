@@ -1,0 +1,36 @@
+- name: crear máquina de laboratorio
+  hosts: localhost
+  vars_files:
+    - env_vars/aws_vault.yml
+  tasks:
+    - name: crear maquina que destruira el mundo
+      ec2:
+        key_name: "curso-itnow"
+        group:
+            - "ENABLE_SSH_ANSIBLE_COURSE"
+        aws_secret_key: "g7milM0bgDy3D6uKUaKtBKhJ1/0vioQnZ9/br9k2"
+        aws_access_key: "AKIAI4BTY2ST5ZIQQJNA"
+        region: "eu-west-1"
+        instance_tags:
+            Name: "Skynet"
+            Curso: "ansible"
+        instance_type: "t2.nano"
+        image: "ami-5448952d"
+        vpc_subnet_id: "subnet-593c842e"
+        count_tag:
+            Name: "{{ item }}"
+        exact_count: 1
+        assign_public_ip: yes
+        wait: yes
+      with_items:
+        - "SarahConnor_lab_01"
+
+    - name: add name to instance
+      add_host:
+        hostname: "SKYNET"
+    - name: guardamos las ip's en inventario
+      shell: "echo {{ item.instances[0].public_ip }} >> inventories/labSKYNET.txt"
+      with_items: '{{ ec2_instances.results }}'
+
+
+
